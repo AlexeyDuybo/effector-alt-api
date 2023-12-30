@@ -1,7 +1,7 @@
 import type { SampleClock } from "./clock";
 import type { SampleSource } from "./source";
 
-export type CustomSample = {
+export type AltSample = {
   clock: SampleClock;
   source: SampleSource;
 };

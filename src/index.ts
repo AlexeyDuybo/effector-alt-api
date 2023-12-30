@@ -1,1 +1,1 @@
-export { CustomSample } from "./sample";
+export { AltSample } from "./sample";
