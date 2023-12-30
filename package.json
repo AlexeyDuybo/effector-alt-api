@@ -2,12 +2,12 @@
   "name": "effector-types",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "typings": "./lib/index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "prettier": "prettier --write .",
     "lint-staged": "lint-staged",
-    "check-types": "tsc --noEmit"
+    "check-types": "tsc --noEmit",
+    "build-types": "tsc --project tsconfig.build.json"
   },
   "keywords": [],
   "author": "",

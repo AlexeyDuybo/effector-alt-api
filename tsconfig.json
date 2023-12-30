@@ -1,9 +1,9 @@
 {
     "compilerOptions": {
         "strict": true,
-        "esModuleInterop": true,
-        "isolatedModules": true,
-        "lib": ["ESNext"]
+        "forceConsistentCasingInFileNames": true,
+        "lib": ["ESNext"],
+        "noEmit": true,
     },
     "include": ["src/**/*"]
 }
