@@ -1,5 +1,9 @@
 {
     "compilerOptions": {
-        "strict": true
-    }
+        "strict": true,
+        "esModuleInterop": true,
+        "isolatedModules": true,
+        "lib": ["ESNext"]
+    },
+    "include": ["src/**/*"]
 }
