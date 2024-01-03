@@ -1,4 +1,4 @@
-import type { Store, UnitTargetable, UnitValue } from "effector";
+import type { Store } from "effector";
 import type { IsNever } from "./shared";
 import type {
   SampleFnWithClock,
@@ -6,6 +6,7 @@ import type {
   SampleFnWithSource,
 } from "./fn";
 import type { GetTargetByKind, SampleTargetKind } from "./target-kind";
+import type { GetTargetShapeValue, SampleTargetShape } from "./target";
 
 type GetSingleParamPredicateResult<
   BaseValue,
@@ -42,24 +43,24 @@ export type SampleFilterWithClock<
   ClockValue,
 > = <
   Predicate extends IsNever<
-    TargetUnit,
+    TargetShape,
     | Store<boolean>
     | ((clock: ClockValue) => boolean)
     | ((clock: ClockValue) => clock is any),
-    [ClockValue] extends [UnitValue<TargetUnit>]
+    [ClockValue] extends [GetTargetShapeValue<TargetShape>]
       ?
           | Store<boolean>
           | ((clock: ClockValue) => boolean)
           | ((clock: ClockValue) => clock is any)
-      : (clock: ClockValue) => clock is UnitValue<TargetUnit>
+      : (clock: ClockValue) => clock is GetTargetShapeValue<TargetShape>
   >,
-  TargetUnit extends UnitTargetable<any> = never,
+  TargetShape extends SampleTargetShape = never,
   FilteredClockValue = GetSingleParamPredicateResult<ClockValue, Predicate>,
 >(
   filter: Predicate,
-  target?: TargetUnit,
+  target?: TargetShape,
 ) => IsNever<
-  TargetUnit,
+  TargetShape,
   {
     toTarget: () => GetTargetByKind<TargetKind, FilteredClockValue>;
     fn: SampleFnWithClock<TargetKind, FilteredClockValue>;
@@ -72,24 +73,24 @@ export type SampleFilterWithSource<
   SourceValue,
 > = <
   Predicate extends IsNever<
-    TargetUnit,
+    TargetShape,
     | Store<boolean>
     | ((source: SourceValue) => boolean)
     | ((source: SourceValue) => source is any),
-    [SourceValue] extends [UnitValue<TargetUnit>]
+    [SourceValue] extends [GetTargetShapeValue<TargetShape>]
       ?
           | Store<boolean>
           | ((source: SourceValue) => boolean)
           | ((source: SourceValue) => source is any)
-      : (clock: SourceValue) => clock is UnitValue<TargetUnit>
+      : (clock: SourceValue) => clock is GetTargetShapeValue<TargetShape>
   >,
-  TargetUnit extends UnitTargetable<any> = never,
+  TargetShape extends SampleTargetShape = never,
   FilteredSourceValue = GetSingleParamPredicateResult<SourceValue, Predicate>,
 >(
   filter: Predicate,
-  target?: TargetUnit,
+  target?: TargetShape,
 ) => IsNever<
-  TargetUnit,
+  TargetShape,
   {
     toTarget: () => GetTargetByKind<TargetKind, FilteredSourceValue>;
     fn: SampleFnWithSource<TargetKind, FilteredSourceValue>;
@@ -103,12 +104,12 @@ export type SampleFilterWithClockAndSource<
   SourceValue,
 > = <
   Predicate extends IsNever<
-    TargetUnit,
+    TargetShape,
     | Store<boolean>
     | ((source: SourceValue, clock: ClockValue) => boolean)
     | ((source: SourceValue, clock: ClockValue) => source is any)
     | ((source: SourceValue, clock: ClockValue) => clock is any),
-    [SourceValue] extends [UnitValue<TargetUnit>]
+    [SourceValue] extends [GetTargetShapeValue<TargetShape>]
       ?
           | Store<boolean>
           | ((source: SourceValue, clock: ClockValue) => boolean)
@@ -117,9 +118,9 @@ export type SampleFilterWithClockAndSource<
       : (
           source: SourceValue,
           clock: ClockValue,
-        ) => source is UnitValue<TargetUnit>
+        ) => source is GetTargetShapeValue<TargetShape>
   >,
-  TargetUnit extends UnitTargetable<any> = never,
+  TargetShape extends SampleTargetShape = never,
   FilteredValues extends [any, any] = GetDoubleParamPredicateResult<
     SourceValue,
     ClockValue,
@@ -127,9 +128,9 @@ export type SampleFilterWithClockAndSource<
   >,
 >(
   filter: Predicate,
-  target?: TargetUnit,
+  target?: TargetShape,
 ) => IsNever<
-  TargetUnit,
+  TargetShape,
   {
     toTarget: () => GetTargetByKind<TargetKind, FilteredValues[0]>;
     fn: SampleFnWithClockAndSource<

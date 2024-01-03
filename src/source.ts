@@ -1,4 +1,4 @@
-import type { Store, Unit, UnitTargetable, UnitValue } from "effector";
+import type { Store, Unit, UnitValue } from "effector";
 import type { IsNever } from "./shared";
 import type {
   GetTargetKind,
@@ -10,6 +10,7 @@ import type {
   SampleFilterWithSource,
   SampleFilterWithClockAndSource,
 } from "./filter";
+import type { GetTargetShapeValue, SampleTargetShape } from "./target";
 
 export type SampleSourceShape =
   | Unit<any>
@@ -27,18 +28,18 @@ type GetSourceShapeValue<Shape extends SampleSourceShape> =
 
 export type SampleSource = <
   const SourceShape extends IsNever<
-    TargetUnit,
+    TargetShape,
     SampleSourceShape,
-    SourceShapeByValue<UnitValue<TargetUnit>>
+    SourceShapeByValue<GetTargetShapeValue<TargetShape>>
   >,
-  TargetUnit extends UnitTargetable<any> = never,
+  TargetShape extends SampleTargetShape = never,
   TargetKind extends SampleTargetKind = GetTargetKind<SourceShape>,
   SourceValue = GetSourceShapeValue<SourceShape>,
 >(
   source: SourceShape,
-  target?: TargetUnit,
+  target?: TargetShape,
 ) => IsNever<
-  TargetUnit,
+  TargetShape,
   {
     toTarget: () => GetTargetByKind<TargetKind, SourceValue>;
     filter: SampleFilterWithSource<TargetKind, SourceValue>;
@@ -52,17 +53,17 @@ export type SampleSourceWithClock<
   ClockValue,
 > = <
   const SourceShape extends IsNever<
-    TargetUnit,
+    TargetShape,
     SampleSourceShape,
-    SourceShapeByValue<UnitValue<TargetUnit>>
+    SourceShapeByValue<GetTargetShapeValue<TargetShape>>
   >,
-  TargetUnit extends UnitTargetable<any> = never,
+  TargetShape extends SampleTargetShape = never,
   SourceValue = GetSourceShapeValue<SourceShape>,
 >(
   source: SourceShape,
-  target?: TargetUnit,
+  target?: TargetShape,
 ) => IsNever<
-  TargetUnit,
+  TargetShape,
   {
     toTarget: () => GetTargetByKind<TargetKind, SourceValue>;
     filter: SampleFilterWithClockAndSource<TargetKind, ClockValue, SourceValue>;

@@ -1,4 +1,4 @@
-import type { Unit, UnitTargetable, UnitValue } from "effector";
+import type { Unit } from "effector";
 import type { IsNever } from "./shared";
 import type {
   GetTargetKind,
@@ -8,6 +8,7 @@ import type {
 import type { SampleFnWithClock } from "./fn";
 import type { SampleFilterWithClock } from "./filter";
 import type { SampleSourceWithClock } from "./source";
+import type { GetTargetShapeValue, SampleTargetShape } from "./target";
 
 export type SampleClockShape<Value = any> = Unit<Value> | Unit<Value>[];
 type GetClockShapeValue<ClockShape extends SampleClockShape> =
@@ -15,16 +16,16 @@ type GetClockShapeValue<ClockShape extends SampleClockShape> =
 
 export type SampleClock = <
   ClockShape extends SampleClockShape<
-    IsNever<TargetUnit, any, UnitValue<TargetUnit>>
+    IsNever<TargetShape, any, GetTargetShapeValue<TargetShape>>
   >,
-  TargetUnit extends UnitTargetable<any> = never,
+  TargetShape extends SampleTargetShape = never,
   TargetKind extends SampleTargetKind = GetTargetKind<ClockShape>,
   ClockValue = GetClockShapeValue<ClockShape>,
 >(
   clock: ClockShape,
-  target?: TargetUnit,
+  target?: TargetShape,
 ) => IsNever<
-  TargetUnit,
+  TargetShape,
   {
     source: SampleSourceWithClock<TargetKind, ClockValue>;
     filter: SampleFilterWithClock<TargetKind, ClockValue>;
