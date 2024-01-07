@@ -3,6 +3,7 @@ node_modules
 src
 .eslintrc.json
 .gitignore
+.npmrc
 .lintstagedrc.json
 .prettierrc
 tsconfig.build.json
