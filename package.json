@@ -7,7 +7,7 @@
   "scripts": {
     "prettier": "prettier --write .",
     "lint-staged": "lint-staged",
-    "check-types": "tsc --noEmit",
+    "check-types": "tsc",
     "build-types": "tsc --project tsconfig.build.json",
     "prepublish": "npm run build-types"
   },

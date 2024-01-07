@@ -54,7 +54,7 @@ export type SampleFilterWithClock<
           | ((clock: ClockValue) => clock is any)
       : (clock: ClockValue) => clock is GetTargetShapeValue<TargetShape>
   >,
-  TargetShape extends SampleTargetShape = never,
+  const TargetShape extends SampleTargetShape = never,
   FilteredClockValue = GetSingleParamPredicateResult<ClockValue, Predicate>,
 >(
   filter: Predicate,
@@ -84,7 +84,7 @@ export type SampleFilterWithSource<
           | ((source: SourceValue) => source is any)
       : (clock: SourceValue) => clock is GetTargetShapeValue<TargetShape>
   >,
-  TargetShape extends SampleTargetShape = never,
+  const TargetShape extends SampleTargetShape = never,
   FilteredSourceValue = GetSingleParamPredicateResult<SourceValue, Predicate>,
 >(
   filter: Predicate,
@@ -120,7 +120,7 @@ export type SampleFilterWithClockAndSource<
           clock: ClockValue,
         ) => source is GetTargetShapeValue<TargetShape>
   >,
-  TargetShape extends SampleTargetShape = never,
+  const TargetShape extends SampleTargetShape = never,
   FilteredValues extends [any, any] = GetDoubleParamPredicateResult<
     SourceValue,
     ClockValue,

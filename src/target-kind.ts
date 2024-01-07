@@ -2,8 +2,8 @@ import type { Event, Store } from "effector";
 import type { SampleClockShape } from "./clock";
 import type { SampleSourceShape } from "./source";
 
-type SampleTargetStoreKind = "store";
-type SampleTargetEventKind = "event";
+export type SampleTargetStoreKind = "store";
+export type SampleTargetEventKind = "event";
 export type SampleTargetKind = SampleTargetEventKind | SampleTargetStoreKind;
 
 export type GetTargetKind<Shape extends SampleClockShape | SampleSourceShape> =

@@ -10,7 +10,9 @@ import type { SampleFilterWithClock } from "./filter";
 import type { SampleSourceWithClock } from "./source";
 import type { GetTargetShapeValue, SampleTargetShape } from "./target";
 
-export type SampleClockShape<Value = any> = Unit<Value> | Unit<Value>[];
+export type SampleClockShape<Value = any> =
+  | Unit<Value>
+  | [Unit<Value>, ...Unit<Value>[]];
 type GetClockShapeValue<ClockShape extends SampleClockShape> =
   ClockShape extends SampleClockShape<infer Value> ? Value : never;
 
@@ -18,7 +20,7 @@ export type SampleClock = <
   ClockShape extends SampleClockShape<
     IsNever<TargetShape, any, GetTargetShapeValue<TargetShape>>
   >,
-  TargetShape extends SampleTargetShape = never,
+  const TargetShape extends SampleTargetShape = never,
   TargetKind extends SampleTargetKind = GetTargetKind<ClockShape>,
   ClockValue = GetClockShapeValue<ClockShape>,
 >(

@@ -4,6 +4,5 @@
     "forceConsistentCasingInFileNames": true,
     "lib": ["ESNext"],
     "noEmit": true
-  },
-  "include": ["src/**/*"]
+  }
 }

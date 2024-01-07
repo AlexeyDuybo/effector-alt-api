@@ -1,5 +1,5 @@
 import type { Store, Unit, UnitValue } from "effector";
-import type { IsNever } from "./shared";
+import type { IsNever, IsAny, IsObject, IsTuple, IsArray } from "./shared";
 import type {
   GetTargetKind,
   SampleTargetKind,
@@ -17,9 +17,35 @@ export type SampleSourceShape =
   | Store<any>[]
   | Record<string, Store<any>>;
 
-type SourceShapeByValue<Value> =
+export type ArrayValueToArraySourceShape<T extends any[]> = IsTuple<
+  T,
+  ArrayTupleValueToArrayTupleSourceShape<T>,
+  Store<T[number]>[]
+>;
+
+type ArrayTupleValueToArrayTupleSourceShape<
+  T extends any[],
+  Result extends Store<any>[] = [],
+> = Result["length"] extends 30
+  ? never
+  : Result["length"] extends T["length"]
+    ? Result
+    : ArrayTupleValueToArrayTupleSourceShape<
+        T,
+        [...Result, Store<T[Result["length"]] & T[number]>]
+      >;
+
+export type SourceShapeByValue<Value> = IsAny<
+  Value,
+  SampleSourceShape,
   | Unit<Value>
-  | { [K in keyof Value]: Store<Value[K]> };
+  | (Value extends any
+      ? IsObject<Value, { [K in keyof Value]: Store<Value[K]> }, never>
+      : never)
+  | (Value extends any[]
+      ? IsArray<Value, ArrayValueToArraySourceShape<Value>, never>
+      : never)
+>;
 
 type GetSourceShapeValue<Shape extends SampleSourceShape> =
   Shape extends Unit<any>
@@ -32,7 +58,7 @@ export type SampleSource = <
     SampleSourceShape,
     SourceShapeByValue<GetTargetShapeValue<TargetShape>>
   >,
-  TargetShape extends SampleTargetShape = never,
+  const TargetShape extends SampleTargetShape = never,
   TargetKind extends SampleTargetKind = GetTargetKind<SourceShape>,
   SourceValue = GetSourceShapeValue<SourceShape>,
 >(
@@ -57,7 +83,7 @@ export type SampleSourceWithClock<
     SampleSourceShape,
     SourceShapeByValue<GetTargetShapeValue<TargetShape>>
   >,
-  TargetShape extends SampleTargetShape = never,
+  const TargetShape extends SampleTargetShape = never,
   SourceValue = GetSourceShapeValue<SourceShape>,
 >(
   source: SourceShape,

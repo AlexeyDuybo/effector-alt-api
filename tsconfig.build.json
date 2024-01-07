@@ -7,5 +7,6 @@
     "outDir": "lib",
     "noEmit": false,
     "declarationMap": true
-  }
+  },
+  "include": ["src/**/*"]
 }

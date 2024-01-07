@@ -13,7 +13,7 @@ export type SampleFnWithClock<
   ClockValue,
 > = <
   FnResult extends IsNever<TargetShape, any, GetTargetShapeValue<TargetShape>>,
-  TargetShape extends SampleTargetShape = never,
+  const TargetShape extends SampleTargetShape = never,
 >(
   fn: (clock: ClockValue) => FnResult,
   target?: TargetShape,
@@ -24,7 +24,7 @@ export type SampleFnWithSource<
   SourceValue,
 > = <
   FnResult extends IsNever<TargetShape, any, GetTargetShapeValue<TargetShape>>,
-  TargetShape extends SampleTargetShape = never,
+  const TargetShape extends SampleTargetShape = never,
 >(
   fn: (source: SourceValue) => FnResult,
   target?: TargetShape,
@@ -36,7 +36,7 @@ export type SampleFnWithClockAndSource<
   SourceValue,
 > = <
   FnResult extends IsNever<TargetShape, any, GetTargetShapeValue<TargetShape>>,
-  TargetShape extends SampleTargetShape = never,
+  const TargetShape extends SampleTargetShape = never,
 >(
   fn: (source: SourceValue, clock: ClockValue) => FnResult,
   target?: TargetShape,
