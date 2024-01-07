@@ -1,6 +1,6 @@
 {
   "name": "effector-alt-api",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "",
   "typings": "./lib/index.d.ts",
   "types": "./lib/index.d.ts",
