@@ -4,6 +4,7 @@
   "description": "",
   "typings": "./lib/index.d.ts",
   "types": "./lib/index.d.ts",
+  "main": "./lib/index.d.ts",
   "scripts": {
     "prettier": "prettier --write .",
     "lint-staged": "lint-staged",

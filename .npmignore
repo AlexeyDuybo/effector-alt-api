@@ -9,3 +9,5 @@ src
 tsconfig.build.json
 tsconfig.json
 package
+tests
+.vscode
