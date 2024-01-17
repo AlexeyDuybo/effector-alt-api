@@ -129,6 +129,16 @@ type tests = [
     SourceShapeByValue<string & { a: string } & string[] & [string, number]>,
     Unit<string & { a: string } & string[] & [string, number]>
   >,
+
+  Assert<
+    SourceShapeByValue<any[] & [string, number]>,
+    Unit<any[] & [string, number]> | [Store<string>, Store<number>]
+  >,
+  Assert<
+    SourceShapeByValue<[any, string] & (string | number)[]>,
+    | Unit<[any, string] & (string | number)[]>
+    | [Store<string | number>, Store<string>]
+  >,
 ];
 
 source()(store());

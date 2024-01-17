@@ -32,7 +32,14 @@ type ArrayTupleValueToArrayTupleSourceShape<
     ? Result
     : ArrayTupleValueToArrayTupleSourceShape<
         T,
-        [...Result, Store<T[Result["length"]] & T[number]>]
+        [
+          ...Result,
+          IsAny<
+            T[Result["length"]],
+            Store<Parameters<Parameters<T["map"]>[0]>[0]>,
+            Store<T[Result["length"]]>
+          >,
+        ]
       >;
 
 export type SourceShapeByValue<Value> = IsAny<
