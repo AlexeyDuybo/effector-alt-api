@@ -10,8 +10,11 @@
     "lint-staged": "lint-staged",
     "check-types": "tsc",
     "build-types": "tsc --project tsconfig.build.json",
-    "prepublish": "npm run build-types"
+    "prepack": "npm run build-types"
   },
+  "files": [
+    "lib/*"
+  ],
   "keywords": [],
   "author": "",
   "license": "ISC",
