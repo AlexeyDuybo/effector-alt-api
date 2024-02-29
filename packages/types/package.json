@@ -1,0 +1,17 @@
+{
+  "name": "effector-alt-api",
+  "version": "1.2.0",
+  "description": "",
+  "types": "./lib/index.d.ts",
+  "main": "./lib/index.d.ts",
+  "scripts": {
+    "build": "tsc --project ./tsconfig.build.json",
+    "prepack": "npm run build"
+  },
+  "files": [
+    "lib/*"
+  ],
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
