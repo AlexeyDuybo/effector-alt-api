@@ -1,4 +1,4 @@
-const {indent} = require('../shared');
+const {indent} = require('./shared');
 
 const fieldsMap = {
     clock: 'clock',

@@ -1,4 +1,4 @@
-const {altSampleTypeName, indent} = require('../shared');
+const {altSampleTypeName, indent} = require('./shared');
 
 const altSampleFields = {
     clock: 'clock',

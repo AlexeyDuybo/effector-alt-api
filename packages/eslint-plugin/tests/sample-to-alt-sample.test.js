@@ -1,6 +1,6 @@
 const RuleTester = require('@typescript-eslint/rule-tester').RuleTester;
-const rule = require('./sample-to-alt-sample');
-const {altApiPackageName} = require('../shared');
+const rule = require('../rules/sample-to-alt-sample');
+const {altApiPackageName} = require('../rules/shared');
 
 RuleTester.afterAll = afterAll;
 

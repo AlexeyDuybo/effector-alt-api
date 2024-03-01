@@ -11,6 +11,10 @@
     "eslintplugin",
     "eslint-plugin"
   ],
+  "files": [
+    "index.js",
+    "rules"
+  ],
   "author": "",
   "license": "ISC",
   "devDependencies": {
