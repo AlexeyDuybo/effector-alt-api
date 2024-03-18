@@ -5,8 +5,10 @@ module.exports = {
     },
     configs: {
         recommended: {
-            "effector-alt-api/alt-sample-to-sample": "warn",
-            "effector-alt-api/sample-to-alt-sample": "warn"
+            rules: {
+                "effector-alt-api/alt-sample-to-sample": "warn",
+                "effector-alt-api/sample-to-alt-sample": "warn"
+            }
         },
     }
 }
